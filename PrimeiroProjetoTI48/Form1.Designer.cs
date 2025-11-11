@@ -47,7 +47,7 @@
             this.btnAdicao.TabIndex = 0;
             this.btnAdicao.Text = "+";
             this.btnAdicao.UseVisualStyleBackColor = true;
-            this.btnAdicao.Click += new System.EventHandler(this.button1_Click);
+            this.btnAdicao.Click += new System.EventHandler(this.btnAdicao_Click);
             // 
             // lblCalculadora
             // 
@@ -82,7 +82,7 @@
             this.btnSubtrair.TabIndex = 0;
             this.btnSubtrair.Text = "-";
             this.btnSubtrair.UseVisualStyleBackColor = true;
-            this.btnSubtrair.Click += new System.EventHandler(this.button1_Click);
+            this.btnSubtrair.Click += new System.EventHandler(this.btnSubtrair_Click);
             // 
             // btnMultiplicar
             // 
@@ -93,7 +93,7 @@
             this.btnMultiplicar.TabIndex = 0;
             this.btnMultiplicar.Text = "x";
             this.btnMultiplicar.UseVisualStyleBackColor = true;
-            this.btnMultiplicar.Click += new System.EventHandler(this.button1_Click);
+            this.btnMultiplicar.Click += new System.EventHandler(this.btnMultiplicar_Click);
             // 
             // btnDivisao
             // 
@@ -104,7 +104,7 @@
             this.btnDivisao.TabIndex = 0;
             this.btnDivisao.Text = "/";
             this.btnDivisao.UseVisualStyleBackColor = true;
-            this.btnDivisao.Click += new System.EventHandler(this.button1_Click);
+            this.btnDivisao.Click += new System.EventHandler(this.btnDivisao_Click);
             // 
             // txtResultado
             // 

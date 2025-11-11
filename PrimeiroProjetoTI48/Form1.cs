@@ -17,14 +17,43 @@ namespace PrimeiroProjetoTI48
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            lblCalculadora.Text = "Olá turma TI48";
-        }
+     
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnAdicao_Click(object sender, EventArgs e)
+        {
+            double valor1 = double.Parse(txtCampo1.Text);
+            double valor2 = double.Parse(txtCampo2.Text);
+            double resultado = valor1 + valor2;
+            txtResultado.Text = resultado.ToString();   
+        }
+
+        private void btnSubtrair_Click(object sender, EventArgs e)
+        {
+            double valor1 = double.Parse(txtCampo1.Text);
+            double valor2 = double.Parse(txtCampo2.Text);
+            double resultado = valor1 - valor2;
+            txtResultado.Text = resultado.ToString();
+        }
+
+        private void btnMultiplicar_Click(object sender, EventArgs e)
+        {
+            double valor1 = double.Parse(txtCampo1.Text);
+            double valor2 = double.Parse(txtCampo2.Text);
+            double resultado = valor1 * valor2;
+            txtResultado.Text = resultado.ToString();
+        }
+
+        private void btnDivisao_Click(object sender, EventArgs e)
+        {
+            double valor1 = double.Parse(txtCampo1.Text);
+            double valor2 = double.Parse(txtCampo2.Text);
+            double resultado = valor1 / valor2;
+            txtResultado.Text = resultado.ToString();
         }
     }
 }
