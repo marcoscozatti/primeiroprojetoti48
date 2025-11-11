@@ -19,7 +19,12 @@ namespace PrimeiroProjetoTI48
 
         private void button1_Click(object sender, EventArgs e)
         {
-            label1.Text = "Olá turma TI48";
+            lblCalculadora.Text = "Olá turma TI48";
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
