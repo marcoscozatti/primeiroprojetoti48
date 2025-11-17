@@ -19,6 +19,7 @@ namespace PrimeiroProjetoTI48
 
         decimal valor1, valor2, resultado;
         string operacao="Adicao";
+        decimal convertePorcentagem;
 
 
         private void Form1_Load(object sender, EventArgs e)
@@ -31,11 +32,12 @@ namespace PrimeiroProjetoTI48
 
         private void btnAdicao_Click(object sender, EventArgs e)
         {
-            operacao = "Adicao";
+                operacao = "Adicao";
                        
             if (operacao == "Adicao")
             {
-                txtResultado.Text = valor1.ToString() + " + ";
+                 txtResultado.Text = valor1.ToString();
+   
             }
 
             txtDisplay.Clear();
@@ -60,7 +62,8 @@ namespace PrimeiroProjetoTI48
 
             if (operacao == "Multiplicacao")
             {
-                txtResultado.Text = valor1.ToString() ;
+                txtResultado.Text = txtDisplay.Text;
+                valor1 = decimal.Parse(txtResultado.Text);
             }
 
             txtDisplay.Clear();
@@ -78,68 +81,26 @@ namespace PrimeiroProjetoTI48
             txtDisplay.Clear();
         }
 
-        private void btn1_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn1.Text;
-            
-        }
-
-        private void btn2_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn2.Text;
-        }
-
-        private void btn3_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn3.Text;
-        }
-
-        private void btn4_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn4.Text;
-        }
-
-        private void btn5_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn5.Text;
-        }
-
-        private void btn6_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn6.Text;
-        }
-
-        private void btn7_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn7.Text;
-        }
-
-        private void btn8_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn8.Text;
-        }
-
-        private void btn9_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn9.Text;
-        }
-
-        private void btn0_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btn0.Text;
-        }
-
-        private void btnVirgula_Click(object sender, EventArgs e)
-        {
-            txtDisplay.Text += btnVirgula.Text;
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
-            operacao = "";
-            txtDisplay.Clear();
             txtResultado.Clear();
+            txtDisplay.Clear();
+            txtDisplay.Focus();
 
+        }
+
+        private void btnNegativo_Click(object sender, EventArgs e)
+        {
+            decimal converteNegativo = Decimal.Parse(txtDisplay.Text);
+            valor1 = (converteNegativo * (-1));
+            txtDisplay.Text = valor1.ToString(); 
+        }
+
+        private void btnPorcento_Click(object sender, EventArgs e)
+        {
+            operacao = "Porcentagem";
+            convertePorcentagem = Decimal.Parse(txtDisplay.Text) / 100;
+            
         }
 
         private void btnIgual_Click(object sender, EventArgs e)
@@ -147,15 +108,15 @@ namespace PrimeiroProjetoTI48
             if (operacao == "Adicao")
             {
                 valor2 = decimal.Parse(txtResultado.Text);
-                resultado = valor2 + valor1;
-                txtResultado.Text = valor1.ToString() + " + " + valor2.ToString();
+                resultado = valor1 + valor2;
+                txtResultado.Text = valor2.ToString() + " + " + valor1.ToString();
                 txtDisplay.Text = resultado.ToString();
 
             }
             if (operacao == "Subtracao")
             {
                 valor2 = decimal.Parse(txtResultado.Text);
-                resultado = valor2 - valor1;
+                resultado = valor1 - valor2;
                 txtResultado.Text = valor2.ToString() + " - " + valor1.ToString();
                 txtDisplay.Text = resultado.ToString();
 
@@ -163,8 +124,15 @@ namespace PrimeiroProjetoTI48
             if (operacao == "Multiplicacao")
             {
                 valor2 = decimal.Parse(txtResultado.Text);
-                resultado = valor2 * valor1;
+                resultado = valor1 * valor2;
                 txtResultado.Text = valor1.ToString() + " * " + valor2.ToString();
+                txtDisplay.Text = resultado.ToString();
+
+            }
+            if (operacao == "Porcentagem")
+            {
+                resultado = convertePorcentagem * valor1;
+                txtResultado.Text = valor1.ToString()  + " * " +  convertePorcentagem.ToString();
                 txtDisplay.Text = resultado.ToString();
 
             }
@@ -172,7 +140,7 @@ namespace PrimeiroProjetoTI48
             {
                 valor2 = decimal.Parse(txtResultado.Text);
                 resultado = valor2 / valor1;
-                txtResultado.Text = valor1.ToString() + " / " + valor2.ToString();
+                txtResultado.Text = valor2.ToString() + " / " + valor1.ToString();
                 txtDisplay.Text = resultado.ToString();
 
             }

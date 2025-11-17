@@ -48,6 +48,8 @@
             this.btnIgual = new System.Windows.Forms.Button();
             this.btnVirgula = new System.Windows.Forms.Button();
             this.btnClear = new System.Windows.Forms.Button();
+            this.btnPorcento = new System.Windows.Forms.Button();
+            this.btnNegativo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnAdicao
@@ -264,11 +266,35 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // btnPorcento
+            // 
+            this.btnPorcento.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPorcento.Location = new System.Drawing.Point(67, 300);
+            this.btnPorcento.Name = "btnPorcento";
+            this.btnPorcento.Size = new System.Drawing.Size(36, 35);
+            this.btnPorcento.TabIndex = 18;
+            this.btnPorcento.Text = "%";
+            this.btnPorcento.UseVisualStyleBackColor = true;
+            this.btnPorcento.Click += new System.EventHandler(this.btnPorcento_Click);
+            // 
+            // btnNegativo
+            // 
+            this.btnNegativo.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnNegativo.Location = new System.Drawing.Point(109, 300);
+            this.btnNegativo.Name = "btnNegativo";
+            this.btnNegativo.Size = new System.Drawing.Size(36, 35);
+            this.btnNegativo.TabIndex = 19;
+            this.btnNegativo.Text = "±";
+            this.btnNegativo.UseVisualStyleBackColor = true;
+            this.btnNegativo.Click += new System.EventHandler(this.btnNegativo_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(217, 342);
+            this.Controls.Add(this.btnNegativo);
+            this.Controls.Add(this.btnPorcento);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.btnVirgula);
             this.Controls.Add(this.btnIgual);
@@ -290,7 +316,7 @@
             this.Controls.Add(this.btn1);
             this.Controls.Add(this.btnAdicao);
             this.Name = "Form1";
-            this.Text = "Caluladora v2.0";
+            this.Text = "Caluladora v3.0";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -319,6 +345,8 @@
         private System.Windows.Forms.Button btnIgual;
         private System.Windows.Forms.Button btnVirgula;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button btnPorcento;
+        private System.Windows.Forms.Button btnNegativo;
     }
 }
 
