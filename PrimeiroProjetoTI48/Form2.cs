@@ -45,7 +45,7 @@ namespace PrimeiroProjetoTI48
             txtNome.Clear();
             txtEmail.Clear();
             txtTelefone.Clear();
-
+            txtNome.Focus();
         }
 
         private void AtualizarGrid()
@@ -128,6 +128,9 @@ namespace PrimeiroProjetoTI48
 
             AtualizarGrid();
             MessageBox.Show("Registro alterado com sucesso!");
+
+
+            LimparCampos();
         }
 
         private void btnExcluir_Click(object sender, EventArgs e)
@@ -159,6 +162,11 @@ namespace PrimeiroProjetoTI48
         private void btn_Click(object sender, EventArgs e)
         {
             AtualizarGrid();
+
+        }
+
+        private void btnConsultar_Click(object sender, EventArgs e)
+        {
 
         }
     }
