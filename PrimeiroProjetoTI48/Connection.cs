@@ -1,11 +1,12 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 public class Connection
 {
     private SqlConnection conn;
 
-    private string connectionString = @"Server=SEU_SERVIDOR;Database=AgendaDB;Trusted_Connection=True;";
+    private string connectionString = @"Data Source=JUN0684676W11-1\BDSENAC;Initial Catalog=AgendaDB;User Id=senaclivre;Password=senaclivre;";
 
     public SqlConnection Connect()
     {
@@ -22,4 +23,10 @@ public class Connection
         if (conn != null && conn.State == ConnectionState.Open)
             conn.Close();
     }
+
+
+
+
+
+
 }

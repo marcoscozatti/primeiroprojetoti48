@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,9 @@ namespace PrimeiroProjetoTI48
             InitializeComponent();
         }
 
+        Connection con = new Connection();
+
+
         bool EmailValido(string email)
         {
             return Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$");
@@ -27,7 +31,7 @@ namespace PrimeiroProjetoTI48
         private void frmAgendda_Load(object sender, EventArgs e)
         {
             txtNome.Focus();
-
+            AtualizarGrid();
         }
 
         List<Contato> lista = new List<Contato>();
@@ -50,54 +54,62 @@ namespace PrimeiroProjetoTI48
 
         private void AtualizarGrid()
         {
-            dg.DataSource = null;
-            dg.DataSource = lista;
+            using (SqlConnection conn = con.Connect())
+            {
+                string sql = "SELECT * FROM Contatos";
+
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                dg.DataSource = dt;
+            }
         }
 
         private void dg_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
-                var contato = lista[e.RowIndex];
-
-                txtID.Text = contato.ID.ToString();
-                txtNome.Text = contato.Nome;
-                txtTelefone.Text = contato.Telefone;
-                txtEmail.Text = contato.Email;
-                txtDateTimePiker.Value = contato.DataRegistro;
+                if (e.RowIndex >= 0)
+                {
+                    txtID.Text = dg.Rows[e.RowIndex].Cells["ID"].Value.ToString();
+                    txtNome.Text = dg.Rows[e.RowIndex].Cells["Nome"].Value.ToString();
+                    txtTelefone.Text = dg.Rows[e.RowIndex].Cells["Telefone"].Value.ToString();
+                    txtEmail.Text = dg.Rows[e.RowIndex].Cells["Email"].Value.ToString();
+                    txtDateTimePiker.Value = Convert.ToDateTime(dg.Rows[e.RowIndex].Cells["DataRegistro"].Value);
+                }
             }
         }
 
 
         private void btnAdicionar_Click(object sender, EventArgs e)
         {
-            // Validações básicas
-            if (txtNome.Text == "")
+            try
             {
-                MessageBox.Show("Informe o nome!");
-                return;
-            }
+                using (SqlConnection conn = con.Connect())
+                {
+                    string sql = @"INSERT INTO Contatos 
+                           (Nome, Telefone, Email, DataRegistro)
+                           VALUES (@Nome, @Telefone, @Email, @DataRegistro)";
 
-            if (!Regex.IsMatch(txtEmail.Text, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+                    SqlCommand cmd = new SqlCommand(sql, conn);
+
+                    cmd.Parameters.AddWithValue("@Nome", txtNome.Text);
+                    cmd.Parameters.AddWithValue("@Telefone", txtTelefone.Text);
+                    cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                    cmd.Parameters.AddWithValue("@DataRegistro", txtDateTimePiker.Value);
+
+                    cmd.ExecuteNonQuery();
+                }
+
+                MessageBox.Show("Registro inserido!");
+                AtualizarGrid();
+                LimparCampos();
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show("E-mail inválido!");
-                return;
+                MessageBox.Show("Erro: " + ex.Message);
             }
-
-            // Criar novo contato
-            Contato c = new Contato();
-            c.ID = proximoId++;
-            c.Nome = txtNome.Text;
-            c.Telefone = txtTelefone.Text;
-            c.Email = txtEmail.Text;
-            c.DataRegistro = txtDateTimePiker.Value;
-
-            // Adicionar na lista
-            lista.Add(c);
-
-            // Atualizar DataGrid
-            AtualizarGrid();
-
             // Limpar campos
             LimparCampos();
         }
@@ -110,26 +122,25 @@ namespace PrimeiroProjetoTI48
                 return;
             }
 
-            int id = int.Parse(txtID.Text);
-
-            Contato contato = lista.FirstOrDefault(c => c.ID == id);
-
-            if (contato == null)
+            using (SqlConnection conn = con.Connect())
             {
-                MessageBox.Show("Registro não encontrado!");
-                return;
+                string sql = @"UPDATE Contatos 
+                       SET Nome=@Nome, Telefone=@Telefone, Email=@Email, DataRegistro=@DataRegistro
+                       WHERE ID=@ID";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@ID", txtID.Text);
+                cmd.Parameters.AddWithValue("@Nome", txtNome.Text);
+                cmd.Parameters.AddWithValue("@Telefone", txtTelefone.Text);
+                cmd.Parameters.AddWithValue("@Email", txtEmail.Text);
+                cmd.Parameters.AddWithValue("@DataRegistro", txtDateTimePiker.Value);
+
+                cmd.ExecuteNonQuery();
             }
 
-            // Atualizar dados
-            contato.Nome = txtNome.Text;
-            contato.Telefone = txtTelefone.Text;
-            contato.Email = txtEmail.Text;
-            contato.DataRegistro = txtDateTimePiker.Value;
-
-            AtualizarGrid();
-            MessageBox.Show("Registro alterado com sucesso!");
-
-
+            MessageBox.Show("Registro alterado!");
+            AtualizarGrid(); ;
             LimparCampos();
         }
 
@@ -141,22 +152,19 @@ namespace PrimeiroProjetoTI48
                 return;
             }
 
-            if (MessageBox.Show("Deseja excluir este registro?", "Confirmação",
-                MessageBoxButtons.YesNo) == DialogResult.No)
-                return;
-
-            int id = int.Parse(txtID.Text);
-
-            Contato contato = lista.FirstOrDefault(c => c.ID == id);
-
-            if (contato != null)
+            using (SqlConnection conn = con.Connect())
             {
-                lista.Remove(contato);
-                AtualizarGrid();
-                LimparCampos();
+                string sql = "DELETE FROM Contatos WHERE ID=@ID";
 
-                MessageBox.Show("Registro excluído com sucesso!");
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@ID", txtID.Text);
+
+                cmd.ExecuteNonQuery();
             }
+
+            MessageBox.Show("Registro excluído!");
+            AtualizarGrid();
+            LimparCampos();
         }
 
         private void btn_Click(object sender, EventArgs e)
