@@ -16,7 +16,7 @@ namespace PrimeiroProjetoTI48
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmAgendda());
+            Application.Run(new Vendas());
         }
     }
 }
