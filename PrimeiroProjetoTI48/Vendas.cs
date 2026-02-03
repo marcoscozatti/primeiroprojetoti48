@@ -19,16 +19,27 @@ namespace PrimeiroProjetoTI48
 
         private void clientesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-             frmAgendda agendda = new frmAgendda();
-             agendda.ShowDialog();
+
+            CadClientes cadClientes = new CadClientes();
+            cadClientes.ShowDialog();
 
 
-            
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
            this.Close();
+        }
+
+        private void cadastrosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void calculadoraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAgendda agendda = new frmAgendda();
+            agendda.ShowDialog();
         }
     }
 }
