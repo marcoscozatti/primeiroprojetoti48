@@ -33,8 +33,8 @@
             this.clientesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.produtosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.vendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.calculadoraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sairToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,14 +64,14 @@
             // clientesToolStripMenuItem
             // 
             this.clientesToolStripMenuItem.Name = "clientesToolStripMenuItem";
-            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientesToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.clientesToolStripMenuItem.Text = "Clientes";
             this.clientesToolStripMenuItem.Click += new System.EventHandler(this.clientesToolStripMenuItem_Click);
             // 
             // produtosToolStripMenuItem
             // 
             this.produtosToolStripMenuItem.Name = "produtosToolStripMenuItem";
-            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.produtosToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
             this.produtosToolStripMenuItem.Text = "Produtos";
             // 
             // vendasToolStripMenuItem
@@ -79,13 +79,7 @@
             this.vendasToolStripMenuItem.Name = "vendasToolStripMenuItem";
             this.vendasToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.vendasToolStripMenuItem.Text = "Vendas";
-            // 
-            // sairToolStripMenuItem
-            // 
-            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
-            this.sairToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.sairToolStripMenuItem.Text = "Sair";
-            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
+            this.vendasToolStripMenuItem.Click += new System.EventHandler(this.vendasToolStripMenuItem_Click);
             // 
             // calculadoraToolStripMenuItem
             // 
@@ -93,6 +87,13 @@
             this.calculadoraToolStripMenuItem.Size = new System.Drawing.Size(82, 20);
             this.calculadoraToolStripMenuItem.Text = "Calculadora";
             this.calculadoraToolStripMenuItem.Click += new System.EventHandler(this.calculadoraToolStripMenuItem_Click);
+            // 
+            // sairToolStripMenuItem
+            // 
+            this.sairToolStripMenuItem.Name = "sairToolStripMenuItem";
+            this.sairToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
+            this.sairToolStripMenuItem.Text = "Sair";
+            this.sairToolStripMenuItem.Click += new System.EventHandler(this.sairToolStripMenuItem_Click);
             // 
             // Vendas
             // 

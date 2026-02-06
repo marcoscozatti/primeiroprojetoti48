@@ -38,8 +38,14 @@ namespace PrimeiroProjetoTI48
 
         private void calculadoraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmAgendda agendda = new frmAgendda();
-            agendda.ShowDialog();
+            Form1 calc = new Form1();
+            calc.ShowDialog();
+        }
+
+        private void vendasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Cadvendas cadvendas = new Cadvendas();  
+            cadvendas.ShowDialog(); 
         }
     }
 }
