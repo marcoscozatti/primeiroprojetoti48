@@ -46,12 +46,15 @@
             this.txtTotal = new System.Windows.Forms.TextBox();
             this.txtDataCompra = new System.Windows.Forms.MaskedTextBox();
             this.txtCliente = new System.Windows.Forms.TextBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.dgvItens = new System.Windows.Forms.DataGridView();
+            this.btnIncluirSacola = new System.Windows.Forms.Button();
+            this.btnAlterar = new System.Windows.Forms.Button();
+            this.btnExcluir = new System.Windows.Forms.Button();
+            this.btnInciarVendas = new System.Windows.Forms.Button();
+            this.lblValTOT = new System.Windows.Forms.Label();
+            this.txtValTOT = new System.Windows.Forms.TextBox();
+            this.btnFinalizarVenda = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -198,70 +201,110 @@
             this.txtCliente.Size = new System.Drawing.Size(389, 20);
             this.txtCliente.TabIndex = 17;
             // 
-            // dataGridView1
+            // dgvItens
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(43, 260);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(617, 261);
-            this.dataGridView1.TabIndex = 18;
+            this.dgvItens.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvItens.Location = new System.Drawing.Point(43, 260);
+            this.dgvItens.Name = "dgvItens";
+            this.dgvItens.Size = new System.Drawing.Size(617, 261);
+            this.dgvItens.TabIndex = 18;
             // 
-            // button1
+            // btnIncluirSacola
             // 
-            this.button1.Location = new System.Drawing.Point(43, 215);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 39);
-            this.button1.TabIndex = 19;
-            this.button1.Text = "Incluir Sacola";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnInclulirSacola);
+            this.btnIncluirSacola.Location = new System.Drawing.Point(43, 215);
+            this.btnIncluirSacola.Name = "btnIncluirSacola";
+            this.btnIncluirSacola.Size = new System.Drawing.Size(75, 39);
+            this.btnIncluirSacola.TabIndex = 19;
+            this.btnIncluirSacola.Text = "Incluir Sacola";
+            this.btnIncluirSacola.UseVisualStyleBackColor = true;
+            this.btnIncluirSacola.Click += new System.EventHandler(this.btnInclulirSacola);
             // 
-            // button2
+            // btnAlterar
             // 
-            this.button2.BackColor = System.Drawing.Color.Yellow;
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(122, 527);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 39);
-            this.button2.TabIndex = 20;
-            this.button2.Text = "Alterar";
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnAlterar.BackColor = System.Drawing.Color.Yellow;
+            this.btnAlterar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAlterar.Location = new System.Drawing.Point(122, 527);
+            this.btnAlterar.Name = "btnAlterar";
+            this.btnAlterar.Size = new System.Drawing.Size(75, 39);
+            this.btnAlterar.TabIndex = 20;
+            this.btnAlterar.Text = "Alterar";
+            this.btnAlterar.UseVisualStyleBackColor = false;
             // 
-            // button3
+            // btnExcluir
             // 
-            this.button3.BackColor = System.Drawing.Color.IndianRed;
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.button3.Location = new System.Drawing.Point(203, 527);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 39);
-            this.button3.TabIndex = 21;
-            this.button3.Text = "Excluir";
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnExcluir.BackColor = System.Drawing.Color.IndianRed;
+            this.btnExcluir.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExcluir.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnExcluir.Location = new System.Drawing.Point(203, 527);
+            this.btnExcluir.Name = "btnExcluir";
+            this.btnExcluir.Size = new System.Drawing.Size(75, 39);
+            this.btnExcluir.TabIndex = 21;
+            this.btnExcluir.Text = "Excluir";
+            this.btnExcluir.UseVisualStyleBackColor = false;
             // 
-            // button4
+            // btnInciarVendas
             // 
-            this.button4.BackColor = System.Drawing.Color.LimeGreen;
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.button4.Location = new System.Drawing.Point(41, 527);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 39);
-            this.button4.TabIndex = 22;
-            this.button4.Text = "Iniciar Vendas";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnInciarVendas.BackColor = System.Drawing.Color.LimeGreen;
+            this.btnInciarVendas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInciarVendas.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnInciarVendas.Location = new System.Drawing.Point(41, 527);
+            this.btnInciarVendas.Name = "btnInciarVendas";
+            this.btnInciarVendas.Size = new System.Drawing.Size(75, 39);
+            this.btnInciarVendas.TabIndex = 22;
+            this.btnInciarVendas.Text = "Iniciar Vendas";
+            this.btnInciarVendas.UseVisualStyleBackColor = false;
+            this.btnInciarVendas.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // lblValTOT
+            // 
+            this.lblValTOT.AutoSize = true;
+            this.lblValTOT.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblValTOT.Location = new System.Drawing.Point(335, 581);
+            this.lblValTOT.Name = "lblValTOT";
+            this.lblValTOT.Size = new System.Drawing.Size(115, 20);
+            this.lblValTOT.TabIndex = 23;
+            this.lblValTOT.Text = "Total a pagar";
+            // 
+            // txtValTOT
+            // 
+            this.txtValTOT.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
+            this.txtValTOT.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.txtValTOT.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtValTOT.ForeColor = System.Drawing.Color.Red;
+            this.txtValTOT.Location = new System.Drawing.Point(451, 574);
+            this.txtValTOT.Multiline = true;
+            this.txtValTOT.Name = "txtValTOT";
+            this.txtValTOT.ReadOnly = true;
+            this.txtValTOT.Size = new System.Drawing.Size(208, 35);
+            this.txtValTOT.TabIndex = 24;
+            this.txtValTOT.Text = "0,00";
+            this.txtValTOT.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // btnFinalizarVenda
+            // 
+            this.btnFinalizarVenda.BackColor = System.Drawing.SystemColors.HotTrack;
+            this.btnFinalizarVenda.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnFinalizarVenda.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.btnFinalizarVenda.Location = new System.Drawing.Point(339, 529);
+            this.btnFinalizarVenda.Name = "btnFinalizarVenda";
+            this.btnFinalizarVenda.Size = new System.Drawing.Size(320, 39);
+            this.btnFinalizarVenda.TabIndex = 25;
+            this.btnFinalizarVenda.Text = "Finalizar Venda";
+            this.btnFinalizarVenda.UseVisualStyleBackColor = false;
             // 
             // Cadvendas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(698, 610);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(698, 626);
+            this.Controls.Add(this.btnFinalizarVenda);
+            this.Controls.Add(this.txtValTOT);
+            this.Controls.Add(this.lblValTOT);
+            this.Controls.Add(this.btnInciarVendas);
+            this.Controls.Add(this.btnExcluir);
+            this.Controls.Add(this.btnAlterar);
+            this.Controls.Add(this.btnIncluirSacola);
+            this.Controls.Add(this.dgvItens);
             this.Controls.Add(this.txtCliente);
             this.Controls.Add(this.txtDataCompra);
             this.Controls.Add(this.txtTotal);
@@ -280,10 +323,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Cadvendas";
             this.Text = "Cadvendas";
             this.Load += new System.EventHandler(this.Cadvendas_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvItens)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,10 +353,13 @@
         private System.Windows.Forms.TextBox txtTotal;
         private System.Windows.Forms.MaskedTextBox txtDataCompra;
         private System.Windows.Forms.TextBox txtCliente;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.DataGridView dgvItens;
+        private System.Windows.Forms.Button btnIncluirSacola;
+        private System.Windows.Forms.Button btnAlterar;
+        private System.Windows.Forms.Button btnExcluir;
+        private System.Windows.Forms.Button btnInciarVendas;
+        private System.Windows.Forms.Label lblValTOT;
+        private System.Windows.Forms.TextBox txtValTOT;
+        private System.Windows.Forms.Button btnFinalizarVenda;
     }
 }

@@ -37,18 +37,87 @@ namespace PrimeiroProjetoTI48
 
         private void Cadvendas_Load(object sender, EventArgs e)
         {
+            vendaBloqueada();
+
+
+
 
         }
 
+        private void vendaDesBloqueada()
+        {
+            txtIDVenda.Enabled = true;
+            txtIDCliente.Enabled = true;
+            txtCliente.Enabled = true;
+            txtDataCompra.Enabled = true;
+            btnIncluirSacola.Enabled = true;
+            txtIdprod.Enabled = true;
+            txtProduto.Enabled = true;
+            txtQuantidade.Enabled = true;
+            txtPrecoUnit.Enabled = true;
+            txtDesconto.Enabled = true;
+            txtTotal.Enabled = true;
+            txtProduto.Enabled = true;
+            txtQuantidade.Enabled = true;
+            btnInciarVendas.Enabled = true;
+            btnAlterar.Enabled = true;
+            btnExcluir.Enabled = true;
+
+        }
+
+        private void vendaBloqueada()
+        {
+            txtIDVenda.Enabled = true;
+            txtIDCliente.Enabled = true;
+            txtCliente.Enabled = true;
+            txtDataCompra.Enabled = true;
+            btnIncluirSacola.Enabled = false;
+            txtIdprod.Enabled = false;
+            txtProduto.Enabled = false;
+            txtQuantidade.Enabled = false;  
+            txtPrecoUnit.Enabled = false;
+            txtDesconto.Enabled = false;
+            txtTotal.Enabled = false;
+            txtProduto.Enabled = false;
+            txtQuantidade.Enabled = false;
+            btnInciarVendas.Enabled = true;
+            btnAlterar.Enabled = false;
+            btnExcluir.Enabled = false;
+
+        }
+
+
+        
         private void button4_Click(object sender, EventArgs e)
         {
+            if (txtIDCliente.Text == "" || txtDataCompra.Text == "")
+            {
+                MessageBox.Show("Preencha todos os campos obrigatórios.");
+                return;
+            }
+
             MestreVendas.idcliente = int.Parse(txtIDCliente.Text);
-            MestreVendas.DataCompra = DateTime.Parse(txtDataCompra.Text);
+
+            try
+            {
+                MestreVendas.DataCompra = DateTime.Parse(txtDataCompra.Text);
+            }
+            catch (Exception x)
+            {
+                MessageBox.Show(x + "  - Data de compra inválida. Por favor, insira uma data válida.");
+                return;
+            }
+            
+            
+
+
 
 
             MestreVendas.CadMestreVendas();
 
 
+            vendaDesBloqueada();
+            txtIdprod.Focus();
 
             //limpadados();
             //atualizaGrid();
@@ -79,8 +148,34 @@ namespace PrimeiroProjetoTI48
 
             itensVendas.CadItensVendas();
 
-           // dgVendas.DataSource = itensVendas.AtualizaGride(dt, idMestreVendas);
-            //limpadados();
+            DataTable dt = new DataTable();
+            atualizaGride();
+         
+            //mostra valor da soma dos produtos na textbox total
+            decimal valorTotal = itensVendas.CalculaValorTotal(idMestreVendas);
+            txtValTOT.Text = valorTotal.ToString("F2"); // Formata o valor para 2 casas decimais
+
+
+            limpadadosProdutos();
+        }
+
+        private void limpadadosProdutos()
+        {
+            txtIdprod.Clear();
+            txtProduto.Clear();
+            txtQuantidade.Clear();
+            txtPrecoUnit.Clear();   
+            txtQuantidade.Clear();
+            txtDesconto.Clear();
+            txtTotal.Clear();
+            txtIdprod.Focus();
+
+        }
+
+        private void atualizaGride()
+        {
+            DataTable dt = new DataTable();
+            dgvItens.DataSource = itensVendas.AtualizaGride(dt);
         }
     }
 }
