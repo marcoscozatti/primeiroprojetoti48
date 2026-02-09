@@ -176,6 +176,7 @@ namespace PrimeiroProjetoTI48
         {
             DataTable dt = new DataTable();
             dgvItens.DataSource = itensVendas.AtualizaGride(dt);
+            //atualização de gride para mostrar os itens da venda
         }
     }
 }
