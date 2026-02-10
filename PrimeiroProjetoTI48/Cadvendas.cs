@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace PrimeiroProjetoTI48
 {
@@ -56,12 +57,14 @@ namespace PrimeiroProjetoTI48
             txtQuantidade.Enabled = true;
             txtPrecoUnit.Enabled = true;
             txtDesconto.Enabled = true;
-            txtTotal.Enabled = true;
+            txtTotal.Enabled = false;
             txtProduto.Enabled = true;
             txtQuantidade.Enabled = true;
-            btnInciarVendas.Enabled = true;
+            btnInciarVendas.Enabled = false;
             btnAlterar.Enabled = true;
             btnExcluir.Enabled = true;
+            
+            
 
         }
 
@@ -74,7 +77,7 @@ namespace PrimeiroProjetoTI48
             btnIncluirSacola.Enabled = false;
             txtIdprod.Enabled = false;
             txtProduto.Enabled = false;
-            txtQuantidade.Enabled = false;  
+            txtQuantidade.Enabled = false;
             txtPrecoUnit.Enabled = false;
             txtDesconto.Enabled = false;
             txtTotal.Enabled = false;
@@ -87,7 +90,7 @@ namespace PrimeiroProjetoTI48
         }
 
 
-        
+
         private void button4_Click(object sender, EventArgs e)
         {
             if (txtIDCliente.Text == "" || txtDataCompra.Text == "")
@@ -107,8 +110,8 @@ namespace PrimeiroProjetoTI48
                 MessageBox.Show(x + "  - Data de compra inválida. Por favor, insira uma data válida.");
                 return;
             }
-            
-            
+
+
 
 
 
@@ -123,48 +126,89 @@ namespace PrimeiroProjetoTI48
             //atualizaGrid();
         }
 
+
+        //---------------------------------------------------------------------------
+        ///  Botão incluir sacola
+        ///  Aqui é onde o usuário pode incluir os itens da venda, preenchendo os campos de 
+        ///  id do produto, quantidade, preço unitário, desconto e total.
+        ///  Implementando hoje dia 10/02/2025 o cálculo do valor total da venda, somando os 
+        ///  totais dos itens incluídos na sacola, e mostrando o valor total na textbox txtValTOT.
+        ///  lembrando dos descontos.
+        ///  ----------------------------------------------------------------------------------------------
         private void btnInclulirSacola(object sender, EventArgs e)
         {
-            itensVendas.idItensVenda = int.Parse(txtIdprod.Text);
-
-            // Buscar o idMestreVendas gerado
-            int idMestreVendas = itensVendas.PegaUltimoIdMestreVendas();
-
-            itensVendas.idprod = int.Parse(txtIdprod.Text);
-            itensVendas.qtde = int.Parse(txtQuantidade.Text);
-            itensVendas.precoUnit = decimal.Parse(txtPrecoUnit.Text);
-            if (txtDesconto.Text == "")
+            try
             {
-                txtDesconto.Text = "0"; // Se o campo de desconto estiver vazio, define como 0
+                // 1. Captura os valores básicos dos campos
+                int idProduto = int.Parse(txtIdprod.Text);
+                int quantidade = int.Parse(txtQuantidade.Text);
+                decimal precoUnitario = decimal.Parse(txtPrecoUnit.Text);
+
+                // 2. Trata o Desconto Percentual
+                // Se o campo estiver vazio, considera 0. Se não, converte o valor digitado.
+                decimal percentualDesconto = 0;
+                if (!string.IsNullOrEmpty(txtDesconto.Text))
+                {
+                    percentualDesconto = decimal.Parse(txtDesconto.Text);
+                }
+
+                // 3. LÓGICA DO CÁLCULO (PORCENTAGEM)
+                decimal subtotal = quantidade * precoUnitario;
+                decimal valorDescontoDinheiro = subtotal * (percentualDesconto / 100);
+                decimal valorTotalComDesconto = subtotal - valorDescontoDinheiro;
+
+                // Atualiza o campo de Total na tela para o usuário ver
+                txtTotal.Text = valorTotalComDesconto.ToString("N2");
+
+                // 4. ALIMENTA O OBJETO PARA O BANCO DE DADOS
+                itensVendas.idprod = idProduto;
+                itensVendas.qtde = quantidade;
+                itensVendas.precoUnit = precoUnitario;
+
+                // Aqui você decide: salvar o % ou o valor em R$ que foi descontado. 
+                // Geralmente salva-se o valor em R$ do desconto:
+                itensVendas.desconto = valorDescontoDinheiro;
+                itensVendas.total = valorTotalComDesconto;
+
+                // 5. PERSISTÊNCIA
+                // Busca o ID da venda principal (Mestre)
+                int idMestreVendas = itensVendas.PegaUltimoIdMestreVendas();
+
+                // Salva o item no banco
+                itensVendas.CadItensVendas();
+
+                // 6. ATUALIZAÇÃO DA INTERFACE
+                atualizaGride();
+
+                // Atualiza a soma total de todos os itens da sacola
+                decimal valorTotalVenda = itensVendas.CalculaValorTotal(idMestreVendas);
+                txtValTOT.Text = valorTotalVenda.ToString("N2");
+
+                // Limpa os campos para o próximo produto
+                limpadadosProdutos();
             }
-            else
+            catch (FormatException)
             {
-                txtDesconto.Text = txtDesconto.Text; // Mantém o valor digitado
+                MessageBox.Show("Por favor, preencha os campos de quantidade, preço e desconto corretamente.", "Erro de preenchimento");
             }
-            itensVendas.desconto = decimal.Parse(txtDesconto.Text);
-            itensVendas.total = decimal.Parse(txtTotal.Text);
-          
-
-
-            itensVendas.CadItensVendas();
-
-            DataTable dt = new DataTable();
-            atualizaGride();
-         
-            //mostra valor da soma dos produtos na textbox total
-            decimal valorTotal = itensVendas.CalculaValorTotal(idMestreVendas);
-            txtValTOT.Text = valorTotal.ToString("F2"); // Formata o valor para 2 casas decimais
-
-
-            limpadadosProdutos();
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao incluir na sacola: " + ex.Message);
+            }
         }
 
+
+
+
+
+
+        // Método para limpar os campos de produto após incluir um item na sacola
         private void limpadadosProdutos()
         {
             txtIdprod.Clear();
             txtProduto.Clear();
             txtQuantidade.Clear();
-            txtPrecoUnit.Clear();   
+            txtPrecoUnit.Clear();
             txtQuantidade.Clear();
             txtDesconto.Clear();
             txtTotal.Clear();
@@ -172,11 +216,24 @@ namespace PrimeiroProjetoTI48
 
         }
 
+
+        // Método para atualizar o DataGridView com os itens da venda
         private void atualizaGride()
         {
             DataTable dt = new DataTable();
             dgvItens.DataSource = itensVendas.AtualizaGride(dt);
             //atualização de gride para mostrar os itens da venda
+        }
+
+
+        // Evento para preencher os campos de edição ao clicar duas vezes em um item do DataGridView
+        private void dgvItens_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            txtIdprod.Text = dgvItens.CurrentRow.Cells[0].Value.ToString();
+            txtQuantidade.Text = dgvItens.CurrentRow.Cells[1].Value.ToString();
+            txtPrecoUnit.Text = dgvItens.CurrentRow.Cells[2].Value.ToString();
+            txtDesconto.Text = dgvItens.CurrentRow.Cells[3].Value.ToString();
+            txtTotal.Text = dgvItens.CurrentRow.Cells[4].Value.ToString();
         }
     }
 }
